@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+  </head>
+  <body>
+    <body>
+      <div id="root"></div>
+      <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+      <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+      <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+      <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+      <script type="text/babel">
+        function SayHello({ firstName, lastName }) {
+          return (
+            <div>
+              Hello {firstName} {lastName}!
+            </div>
+          );
+        }
+
+        function SayGoodbye({ byeName }) {
+          return <div>Hello {byeName}!</div>;
+        }
+
+        // Bssic Version
+        // SayHello.propTypes = {
+        //   firstName(props, propName, componentName) {
+        //     if (typeof props[propName] !== "string") {
+        //       return new Error(
+        //         `Hey ${componentName} needs ${propName} to be a string`
+        //       );
+        //     }
+        //   }
+        // };
+
+        // Combined function (not required with propTypes library)
+        // const PropTypes = {
+        //   string(props, propName, componentName) {
+        //     if (typeof props[propName] !== "string") {
+        //       return new Error(
+        //         `Hey, the component ${componentName} needs the prop ${propName} to be a string`
+        //       );
+        //     }
+        //   }
+        // };
+
+        SayHello.propTypes = {
+          firstName: PropTypes.string.isRequired,
+          lastName: PropTypes.string.isRequired
+        };
+
+        SayGoodbye.propTypes = {
+          byeName: PropTypes.string
+        };
+
+        const element = <SayHello firstName={false} />;
+        // const element = <SayGoodbye byeName={false} />;
+
+        console.log(element);
+
+        ReactDOM.render(element, document.getElementById("root"));
+      </script>
+    </body>
+  </body>
+</html>
