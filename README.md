@@ -1,2 +1,2 @@
-# beginnersreact
+# react
 Created with CodeSandbox
