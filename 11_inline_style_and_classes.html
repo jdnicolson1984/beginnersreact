@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .box {
+        border: black 1px solid;
+      }
+      .box--small {
+        width: 50px;
+        height: 50px;
+      }
+
+      .box--medium {
+        width: 100px;
+        height: 100px;
+      }
+
+      .box--large {
+        width: 150px;
+        height: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script type="text/babel">
+      function Box({ className = "", style, size, ...rest }) {
+        // This is used show that className does not need to be used and can be applied through a function
+        const sizeClassName = size ? `box--${size}` : "";
+        return (
+          <div
+            className={`box ${className} ${sizeClassName}`}
+            style={{ fontStyle: "italic", ...style }}
+            {...rest}
+          />
+        );
+      }
+
+      // Using attributes inline
+      // const element = (
+      //   <>
+      //     <div className="box box--small" style={{ backgroundColor: "yellow" }}>
+      //       Small Box
+      //     </div>
+      //     <div className="box box--medium" style={{ backgroundColor: "blue" }}>
+      //       Medium Box
+      //     </div>
+      //     <div className="box box--large" style={{ backgroundColor: "red" }}>
+      //       Large Box
+      //     </div>
+      //   </>
+      // );
+
+      const element = (
+        <>
+          <Box
+            size="small"
+            className="james"
+            style={{ backgroundColor: "yellow" }}
+          >
+            Small Box
+          </Box>
+          <Box
+            size="medium"
+            className="stacy"
+            style={{ backgroundColor: "blue" }}
+          >
+            Medium Box
+          </Box>
+          <Box size="large" className="vivi" style={{ backgroundColor: "red" }}>
+            Large Box
+          </Box>
+        </>
+      );
+      ReactDOM.render(element, document.getElementById("root"));
+    </script>
+  </body>
+</html>
