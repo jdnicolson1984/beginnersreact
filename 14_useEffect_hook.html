@@ -26,14 +26,22 @@
 
         // Better version
         // State is used to track inputs coming in that need to be recorded and used later on
-        const [name, setName] = React.useState("");
+        const [name, setName] = React.useState(
+          window.localStorage.getItem("name") || ""
+        );
+
+        // Add this line for the useEffect hook. This allows an action to happen everytime the component is rerendered
+        React.useEffect(() => {
+          window.localStorage.setItem("name", name);
+        });
+
         const handleChange = (event) => setName(event.target.value);
 
         return (
           <div>
             <form>
               <label htmlFor="name">Name:</label>
-              <input onChange={handleChange} id="name" />
+              <input value={name} onChange={handleChange} id="name" />
             </form>
             {name ? <strong>Hello {name}</strong> : "Please type your name"}
           </div>
