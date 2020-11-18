@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <style>
+      .error {
+        background: red;
+        color: white;
+      }
+    </style>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script type="text/babel">
+      // https://github.com/donavon/hook-flow
+
+      function Useform() {
+        const [state, setState] = React.useState("");
+        const isLowerCase = state === state.toLowerCase();
+        const error = isLowerCase ? null : "ERROR";
+
+        function handleSubmit(event) {
+          event.preventDefault();
+          //OK way to get value
+          console.log(event.target[0].value);
+          // Better way to get value
+          console.log(event.target.elements.myInput.value);
+          const username = event.target.elements.myInput.value;
+          alert(`Hello ${username}`);
+        }
+
+        function handleChange(event) {
+          setState(event.target.value);
+          // console.log(state);
+          // console.log(isLowerCase);
+        }
+
+        return (
+          <>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="myInput">Name</label>
+                <input id="myInput" onChange={handleChange} />
+              </div>
+              <button type="submit">Submit</button>
+            </form>
+            <p>{error}</p>
+            <p className={isLowerCase ? "" : "error"}>
+              {`Input ${state}`} {isLowerCase ? "" : " Has UpperCase"}
+            </p>
+            <a href="12_event_handlers.html">Events</a>
+          </>
+        );
+      }
+      ReactDOM.render(<Useform />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

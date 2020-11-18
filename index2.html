@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>React Beginners</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+    <script type="text/babel">
+      const files = [
+        {
+          url: "08_proptype.html",
+          text: "Lesson 8 - Proptypes"
+        },
+        {
+          url: "09_interpolation.html",
+          text: "Lesson 9 - Interpolation"
+        },
+        {
+          url: "10_rerendering.html",
+          text: "Lesson 10 - Rerendering"
+        },
+        {
+          url: "11_inline_style_and_classes.html",
+          text: "Lesson 11 - Inline Style"
+        }
+      ];
+
+      function Lesson({ href, title }) {
+        return (
+          <tr>
+            <td>
+              <a href={href}>{title}</a>
+            </td>
+          </tr>
+        );
+      }
+
+      // First attempt at using map to parse an array
+      // const listItems = files.map((file) => (
+      //   <tr key={file.url}>
+      //     <td>
+      //       <a href={file.url}>{file.text}</a>
+      //     </td>
+      //   </tr>
+      // ));
+
+      // Second attempt using the Lesson component
+      const listItems = files.map((file) => (
+        <Lesson key={file.url} href={file.url} title={file.text} />
+      ));
+
+      function App() {
+        return (
+          <table>
+            <tbody>{listItems}</tbody>
+          </table>
+        );
+      }
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
