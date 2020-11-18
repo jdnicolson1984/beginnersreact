@@ -37,6 +37,8 @@
 
         function handleChange(event) {
           setState(event.target.value);
+          console.log(error);
+          console.log(Boolean(error));
           // console.log(state);
           // console.log(isLowerCase);
         }
@@ -48,7 +50,9 @@
                 <label htmlFor="myInput">Name</label>
                 <input id="myInput" onChange={handleChange} />
               </div>
-              <button type="submit">Submit</button>
+              <button disabled={Boolean(error)} type="submit">
+                Submit
+              </button>
             </form>
             <p>{error}</p>
             <p className={isLowerCase ? "" : "error"}>
